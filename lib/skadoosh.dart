@@ -1,6 +1,9 @@
 import 'dart:io';
 
-void createFolder(String domain) async {
+import 'package:skadoosh/common.dart';
+import 'package:skadoosh/template.dart';
+
+void createCleanCodeDirectory(String domain) async {
   String projectRoot = Directory.current.path;
 
   List<String> directories = [
@@ -17,15 +20,16 @@ void createFolder(String domain) async {
     '$projectRoot/lib/$domain/domain/usecases/',
   ];
 
-// Loop through the list and create each directory asynchronously
+  // Loop through the list and create each directory asynchronously
   for (var dirPath in directories) {
-    final directory = Directory(dirPath);
-    if (await directory.exists()) {
-      print('Directory "$dirPath" already exists');
-      continue;
-    }
-
-    await directory.create(recursive: true);
-    print('Directory "$dirPath" created');
+    createFolder(dirPath);
   }
+}
+
+void createViewModel(String filePath, String fileName) async {
+  final packageName = await loadPackageName();
+
+  String template = generateViewModelTemplate(fileName, packageName);
+
+  createFile(filePath, fileName, template);
 }

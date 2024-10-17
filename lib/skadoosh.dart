@@ -8,7 +8,6 @@ void createCleanCodeDirectory(String domain) async {
 
   List<String> directories = [
     '$projectRoot/lib/$domain/data/',
-    '$projectRoot/lib/$domain/data/datasources/',
     '$projectRoot/lib/$domain/data/repositories/',
     '$projectRoot/lib/$domain/data/models/',
     '$projectRoot/lib/$domain/presentation/',
@@ -16,7 +15,6 @@ void createCleanCodeDirectory(String domain) async {
     '$projectRoot/lib/$domain/presentation/widgets/',
     '$projectRoot/lib/$domain/presentation/views/',
     '$projectRoot/lib/$domain/domain/entities/',
-    '$projectRoot/lib/$domain/domain/repositories/',
     '$projectRoot/lib/$domain/domain/usecases/',
   ];
 

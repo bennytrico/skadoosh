@@ -3,36 +3,31 @@ import 'package:skadoosh/skadoosh.dart';
 
 void main(List<String> arguments) {
   final parser = ArgParser()
-    ..addOption('domain', abbr: 'd', help: 'Domain')
-    ..addOption('view_model', abbr: 'v', help: 'View Model')
-    ..addOption('api', abbr: 'a', help: 'Api')
-    ..addOption(
-      'path',
-      abbr: 'p',
-      help: 'Path to generate file',
+    ..addFlag('domain', abbr: 'd', help: 'Domain', defaultsTo: false)
+    ..addFlag('view-model', abbr: 'v', help: 'View Model', defaultsTo: false)
+    ..addFlag('usecase', abbr: 'u', help: 'Use Case', defaultsTo: false)
+    ..addFlag(
+      'api',
+      abbr: 'a',
+      help: 'Api',
+      defaultsTo: false,
     );
 
   var argResults = parser.parse(arguments);
 
-  if (argResults['domain'] != null) {
-    createCleanCodeDirectory(argResults['domain']);
+  if (argResults['domain']) {
+    createCleanCodeDirectory();
   }
 
-  if (argResults['view_model'] != null) {
-    if (argResults['path'] == null) {
-      print('Path is required');
-      return;
-    }
-
-    createViewModel(argResults['path'], argResults['view_model']);
+  if (argResults['view-model']) {
+    createViewModel();
   }
 
-  if (argResults['api'] != null) {
-    if (argResults['path'] == null) {
-      print('Path is required');
-      return;
-    }
+  if (argResults['api']) {
+    createAPI();
+  }
 
-    createAPI(argResults['path'], argResults['api']);
+  if (argResults['usecase']) {
+    createUsecase();
   }
 }

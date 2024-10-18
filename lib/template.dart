@@ -27,3 +27,15 @@ abstract class ${snakeToCamelCaseCapitalized(fileName)} {
 }
   ''';
 }
+
+String generateUsecase(String fileName) {
+  return '''
+abstract class ${snakeToCamelCaseCapitalized(fileName)} {
+  
+}
+
+class ${snakeToCamelCaseCapitalized(fileName)}Impl implements ${snakeToCamelCaseCapitalized(fileName)} {
+  
+}
+  ''';
+}

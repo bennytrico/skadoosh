@@ -31,19 +31,25 @@ void createFile(String filePath, String fileName, String template) async {
 }
 
 Future<String> loadPackageName() async {
-  final pubspecFile = File('pubspec.yaml');
+  var dir = Directory.current;
 
-  if (!await pubspecFile.exists()) {
-    throw Exception('pubspec.yaml not found!');
+  // ignore: unnecessary_null_comparison
+  while (dir != null) {
+    final pubspec = File('${dir.path}/pubspec.yaml');
+    if (pubspec.existsSync()) {
+      final yamlContent = loadYaml(pubspec.readAsStringSync());
+      return yamlContent['name'];
+    }
+
+    // Move to the parent directory
+    final parent = dir.parent;
+    if (parent.path == dir.path) {
+      break; // Reached the root directory, no pubspec.yaml found
+    }
+    dir = parent;
   }
-  // Read the content of the pubspec.yaml file
-  final pubspecContent = await pubspecFile.readAsString();
 
-  // Parse the YAML content
-  final yamlMap = loadYaml(pubspecContent);
-
-  // Extract the package name
-  return yamlMap['name'];
+  throw Exception('pubspec.yaml not found');
 }
 
 void createFolder(String dirPath) async {

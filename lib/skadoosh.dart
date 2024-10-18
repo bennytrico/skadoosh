@@ -31,3 +31,9 @@ void createViewModel(String filePath, String fileName) async {
 
   createFile(filePath, fileName, template);
 }
+
+void createAPI(String filePath, String fileName) async {
+  String template = generateAPIRetrofit(fileName);
+
+  createFile(filePath, fileName, template);
+}

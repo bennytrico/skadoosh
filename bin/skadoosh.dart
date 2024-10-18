@@ -5,6 +5,7 @@ void main(List<String> arguments) {
   final parser = ArgParser()
     ..addOption('domain', abbr: 'd', help: 'Domain')
     ..addOption('view_model', abbr: 'v', help: 'View Model')
+    ..addOption('api', abbr: 'a', help: 'Api')
     ..addOption(
       'path',
       abbr: 'p',
@@ -24,5 +25,14 @@ void main(List<String> arguments) {
     }
 
     createViewModel(argResults['path'], argResults['view_model']);
+  }
+
+  if (argResults['api'] != null) {
+    if (argResults['path'] == null) {
+      print('Path is required');
+      return;
+    }
+
+    createAPI(argResults['path'], argResults['api']);
   }
 }

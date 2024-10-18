@@ -15,4 +15,4 @@ dev_dependencies:
   test: ^1.21.0
 
 executables:
-  skadoosh: skadoosh.dart
+  skadoosh: skadoosh

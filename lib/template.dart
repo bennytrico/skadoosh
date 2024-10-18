@@ -12,3 +12,18 @@ class ${snakeToCamelCaseCapitalized(fileName)} extends BaseViewModel {
 }
   ''';
 }
+
+String generateAPIRetrofit(String fileName) {
+  return '''
+import 'package:dio/dio.dart';
+import 'package:retrofit/dio.dart';
+import 'package:retrofit/http.dart';
+
+part '$fileName.g.dart';
+
+@RestApi()
+abstract class ${snakeToCamelCaseCapitalized(fileName)} {
+  factory ${snakeToCamelCaseCapitalized(fileName)}(Dio dio, {String baseUrl}) = _${snakeToCamelCaseCapitalized(fileName)};
+}
+  ''';
+}
